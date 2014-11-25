@@ -26,6 +26,7 @@ def receive_notification(request):
         if response.status_code == 200:
             return HttpResponse(six.b('Notificação recebida com sucesso.'))
         else:
-            logger.error('Retorno {} do pagseguro'.format(response.status_code),
-                         extra=dict(data=response.text))
+            logger.error('Retorno {} do pagseguro id {}'.format(
+                response.status_code, notification_code, notification_type),
+                extra=dict(data=response.text))
             return HttpResponse(six.b('Notificação inválida.'), status=200)
